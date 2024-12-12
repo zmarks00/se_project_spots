@@ -16,10 +16,18 @@
 
 .profile__name {
   margin: 0 0 12px;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 32px;
 }
 
 .profile__description {
   margin: 0;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 16px;
+  color: #212121;
+  opacity: 70%;
 }
 
 .profile__edit-button {
@@ -28,6 +36,7 @@
   border: none;
   background: none;
   display: flex;
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
 }
 
 .profile__add-button {
@@ -41,4 +50,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  gap: 2px;
 }
