@@ -9,6 +9,7 @@
   border-radius: 8px;
   height: 190px;
   width: 190px;
+  object-fit: cover;
 }
 
 .profile__column {
@@ -56,6 +57,12 @@
   font-size: 16px;
   font-weight: 500;
   color: #212121;
+  transition: opacity 0.2s;
+  cursor: pointer;
+}
+
+.profile__edit-button:hover {
+  opacity: 80%;
 }
 
 .profile__add-button {
@@ -73,6 +80,12 @@
   gap: 2px;
   font-size: 16px;
   line-height: 1;
+  transition: opacity 0.2s;
+  cursor: pointer;
+}
+
+.profile__add-button:hover {
+  opacity: 80%;
 }
 
 @media screen and (max-width: 627px) {
