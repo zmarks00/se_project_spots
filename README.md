@@ -18,3 +18,9 @@ The basis of this project was to create a webpage utilizing my (newly) acquired 
 This webpage is deployed to GitHub pages
 
 - [Deployment Link](https://zmarks00.github.io/se_project_spots/)
+
+## Screencast Video
+
+Below, find a link to view a screencast briefly describing this project and the challenges that went along with making it.
+
+- [Deployment Link](https://www.loom.com/share/c8f9066f3b0d4249a9a737c223acd33b)
