@@ -35,6 +35,8 @@
   width: 40px;
   height: 40px;
   cursor: pointer;
+  background-color: transparent;
+  border: none;
 }
 
 .modal__title {
@@ -73,6 +75,7 @@
   line-height: 1;
   font-weight: 500;
   cursor: pointer;
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
 }
 
 @media screen and (max-width: 627px) {
