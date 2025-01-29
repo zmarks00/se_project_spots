@@ -23,6 +23,10 @@ const initialCards = [
     name: "Mountain house",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/6-photo-by-moritz-feldmann-from-pexels.jpg",
   },
+  {
+    name: "Bridge",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/7-photo-by-griffin-wooldridge-from-pexels.jpg",
+  },
 ];
 
 console.log(initialCards);
@@ -46,6 +50,14 @@ const cardForm = cardModal.querySelector(".modal__form");
 const cardModalCloseButton = cardModal.querySelector(".modal__close-button");
 const cardNameInput = cardModal.querySelector("#add-card-name-input");
 const cardLinkInput = cardModal.querySelector("#add-card-link-input");
+
+const previewModal = document.querySelector("#preview-modal");
+const previewModalImageElement = previewModal.querySelector(".modal__image");
+const previewModalCaptionElement =
+  previewModal.querySelector(".modal__caption");
+const previewModalCloseButton = previewModal.querySelector(
+  ".modal__close-button"
+);
 
 // Card related elements
 const cardTemplate = document.querySelector("#card-template");
@@ -72,6 +84,13 @@ function getCardElement(data) {
 
   cardDeleteButton.addEventListener("click", () => {
     cardElement.remove();
+  });
+
+  cardImageEl.addEventListener("click", () => {
+    openModal(previewModal);
+    previewModalImageElement.src = data.link;
+    previewModalCaptionElement.textContent = data.name;
+    previewModalImageElement.alt = data.name;
   });
 
   return cardElement;
@@ -116,6 +135,9 @@ cardEditButton.addEventListener("click", () => {
 cardModalCloseButton.addEventListener("click", () => closeModal(cardModal));
 editFormElement.addEventListener("submit", handleEditFormSubmit);
 cardForm.addEventListener("submit", handleAddCardSubmit);
+previewModalCloseButton.addEventListener("click", () =>
+  closeModal(previewModal)
+);
 
 // lines 83-86 are a longer form way of expressing lines 88-91
 // for (let i = 0; i < initialCards.length; i++) {
