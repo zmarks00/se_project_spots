@@ -26,20 +26,25 @@
   opacity: 40%;
   transition: opacity color 0.3s;
   cursor: pointer;
+  background-repeat: no-repeat;
 }
 
 .card__like-button:hover {
   opacity: 100%;
   color: #212121;
+  background-repeat: no-repeat;
 }
 
 .card__like-button_liked {
   background-image: url(../images/like-icon-liked.svg);
   opacity: 1;
+  background-repeat: no-repeat;
+  mix-blend-mode: multiply;
 }
 
 .card__like-button_liked:hover {
   background-image: url(../images/like-icon-liked-hover.svg);
+  background-repeat: no-repeat;
 }
 
 .card__delete-button {
