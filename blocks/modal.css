@@ -132,14 +132,25 @@
     font-size: 20px;
     margin: 10px 0 34px;
   }
-  .modal__close-button {
-    top: 12px;
-    right: 12px;
+  .modal__close-button_type_preview {
+    top: -40px;
+    right: 50px;
   }
+
   .modal__label {
     margin-bottom: 24px;
   }
   .modal__submit-button {
     width: 100%;
+  }
+  .modal__image {
+    border-radius: 4px;
+    padding: 0px 16px;
+  }
+  .modal__caption {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19.2px;
+    margin-left: 16px;
   }
 }
