@@ -180,4 +180,8 @@
     top: 12px;
     right: 12px;
   }
+  .modal__close-button_type_preview {
+    top: -40px;
+    right: 0px;
+  }
 }
