@@ -108,7 +108,7 @@
   line-height: 20px;
 }
 
-.modal__input-type-error {
+.modal__input-type_error {
   border: 1px solid rgba(255, 0, 0, 0.6);
 }
 
@@ -134,7 +134,7 @@
   font-family: "Poppins", Arial, Helvetica, sans-serif;
 }
 
-.modal__submit-button-disabled {
+.modal__submit-button_disabled {
   opacity: 0.5;
 }
 
@@ -169,5 +169,15 @@
     font-size: 16px;
     font-weight: 500;
     line-height: 19.2px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .modal__container {
+    width: auto;
+  }
+  .modal__close-button {
+    top: 12px;
+    right: 12px;
   }
 }

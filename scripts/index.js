@@ -99,9 +99,8 @@ function getCardElement(data) {
 }
 
 function closeOverlay(evt) {
-  const openModal = document.querySelector(".modal_opened");
   if (evt.target.classList.contains("modal")) {
-    closeModal(openModal);
+    closeModal(evt.target);
   }
 }
 
