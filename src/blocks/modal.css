@@ -138,6 +138,40 @@
   opacity: 0.5;
 }
 
+.modal__confirm-button {
+  background-color: #ff6565;
+  color: #212121;
+}
+
+.modal__confirm-button:hover {
+  background-color: #ff3333;
+}
+
+.modal__cancel-button {
+  color: black;
+  background-color: #fff;
+}
+
+.modal__cancel-button:hover {
+  background-color: #212121;
+  color: #ffff;
+}
+
+#delete-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 24px;
+}
+
+.modal__title_type_delete {
+  font-size: 24px;
+  line-height: 1;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+}
+
 @media screen and (max-width: 627px) {
   .modal__container {
     padding: 12px;
