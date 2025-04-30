@@ -169,21 +169,21 @@
 
 @media screen and (max-width: 320px) {
   .profile__avatar-btn {
-    visibility: hidden;
+    visibility: visible;
     border-radius: 6px;
     width: 23px;
     height: 23px;
-    bottom: 0px;
-    right: 0px;
+    bottom: 23px;
+    right: 5px;
+    background-color: rgba(0, 0, 0, 0.7);
   }
 
-  .profile__avatar-btn::after {
-    content: "";
-    width: auto;
+  .profile__avatar-container:hover .profile__avatar-btn {
+    visibility: visible;
     border-radius: 6px;
     width: 23px;
     height: 23px;
-    bottom: 0px;
-    right: 0px;
+    bottom: 23px;
+    right: 5px;
   }
 }
