@@ -132,6 +132,7 @@ function getCardElement(data, userInfo) {
     handleDeleteCardSubmit(cardElement, data._id);
     cardToDeleteId = data._id;
     cardToDeleteElement = cardElement;
+    openModal(deleteModal);
   });
 
   cardImageEl.addEventListener("click", () => {
@@ -215,41 +216,25 @@ function handleAddCardSubmit(evt) {
     });
 }
 
-function handleDeleteCardSubmit(cardElement, cardId) {
-  openModal(deleteModal);
-
-  // Select the confirmation button inside the delete modal
-  const deleteConfirmButton = deleteModal.querySelector(
-    ".modal__confirm-button"
-  );
-  // Add a one-time event listener for the confirmation
-  deleteConfirmButton.addEventListener("click", () => {
-    setButtonText(deleteConfirmButton, "Delete");
-
-    const deleteForm = deleteModal.querySelector(".modal__form");
-    deleteForm.addEventListener(
-      "submit",
-      (evt) => {
-        evt.preventDefault();
-
-        api
-          .deleteCard(cardId)
-          .then(() => {
-            cardElement.remove(); // Remove the card from the DOM
-            closeModal(deleteModal); // Close the modal
-          })
-          .catch((err) => {
-            console.error("Error deleting card:", err);
-          })
-          .finally(() => {
-            // Reset the button text to "Yes" (or the default text)
-            setButtonText(deleteConfirmButton, "Yes");
-          });
-      },
-      { once: true } // Ensure the event listener is only triggered once
-    );
-  });
+function handleDeleteCardSubmit(evt) {
+  evt.preventDefault();
+  api
+    .deleteCard(cardToDeleteId)
+    .then(() => {
+      cardToDeleteElement.remove(); // Remove the card from the DOM
+      closeModal(deleteModal); // Close the modal
+    })
+    .catch((err) => {
+      console.error("Error deleting card:", err);
+    })
+    .finally(() => {
+      // Reset the button text to "Yes" (or the default text)
+      setButtonText(deleteConfirmButton, "Yes");
+    });
 }
+
+const deleteForm = deleteModal.querySelector(".modal__form");
+deleteForm.addEventListener("submit", handleDeleteCardSubmit);
 
 function handleAvatarSubmit(evt) {
   evt.preventDefault();
