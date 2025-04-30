@@ -76,6 +76,12 @@ const avatarInput = avatarModal.querySelector("#profile-avatar-input");
 
 // Delete form elements
 const deleteModal = document.querySelector("#delete-modal");
+const deleteModalCancelButton = deleteModal.querySelector(
+  ".modal__cancel-button"
+);
+const deleteModalCloseButton = deleteModal.querySelector(
+  ".modal__close-button_type_delete"
+);
 
 // Card related elements
 const cardTemplate = document.querySelector("#card-template");
@@ -129,7 +135,6 @@ function getCardElement(data, userInfo) {
 
   // Delete card logic
   cardDeleteButton.addEventListener("click", () => {
-    handleDeleteCardSubmit(cardElement, data._id);
     cardToDeleteId = data._id;
     cardToDeleteElement = cardElement;
     openModal(deleteModal);
@@ -218,6 +223,8 @@ function handleAddCardSubmit(evt) {
 
 function handleDeleteCardSubmit(evt) {
   evt.preventDefault();
+  const deleteConfirmButton = evt.submitter;
+  setButtonText(deleteConfirmButton, "Deleting...");
   api
     .deleteCard(cardToDeleteId)
     .then(() => {
@@ -229,7 +236,7 @@ function handleDeleteCardSubmit(evt) {
     })
     .finally(() => {
       // Reset the button text to "Yes" (or the default text)
-      setButtonText(deleteConfirmButton, "Yes");
+      setButtonText(deleteConfirmButton, "Delete");
     });
 }
 
@@ -287,5 +294,9 @@ cardForm.addEventListener("submit", handleAddCardSubmit);
 previewModalCloseButton.addEventListener("click", () =>
   closeModal(previewModal)
 );
+deleteModalCancelButton.addEventListener("click", () =>
+  closeModal(deleteModal)
+);
+deleteModalCloseButton.addEventListener("click", () => closeModal(deleteModal));
 
 enableValidation(settings);

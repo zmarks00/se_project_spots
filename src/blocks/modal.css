@@ -70,6 +70,11 @@
   opacity: 1;
 }
 
+.modal__close-button_type_delete {
+  right: -40px;
+  top: -10px;
+}
+
 .modal__caption {
   font-family: "Poppins", Arial, Helvetica, sans-serif;
   color: #fff;
@@ -217,5 +222,13 @@
   .modal__close-button_type_preview {
     top: -40px;
     right: 0px;
+  }
+  #delete-modal .modal__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .modal__close-button_type_delete {
+    top: -40px;
   }
 }

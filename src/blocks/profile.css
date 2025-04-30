@@ -35,8 +35,6 @@
   padding: 0;
   width: 190px;
   height: 190px;
-  color: #000, 50%;
-  z-index: 1;
 }
 
 .profile__avatar-btn::after {
@@ -163,6 +161,20 @@
 
   .profile__add-button {
     margin: 0;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .profile__avatar-btn {
+    visibility: visible;
+    margin: 0 0 12px;
+    height: 80px;
+    width: 100%;
+  }
+
+  .profile__avatar-btn::after {
+    content: "";
     width: 100%;
   }
 }
