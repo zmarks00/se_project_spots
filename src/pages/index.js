@@ -224,7 +224,7 @@ function handleAddCardSubmit(evt) {
 function handleDeleteCardSubmit(evt) {
   evt.preventDefault();
   const deleteConfirmButton = evt.submitter;
-  setButtonText(deleteConfirmButton, "Deleting...");
+  setButtonText(deleteConfirmButton, true, "Delete", "Deleting...");
   api
     .deleteCard(cardToDeleteId)
     .then(() => {
@@ -236,7 +236,7 @@ function handleDeleteCardSubmit(evt) {
     })
     .finally(() => {
       // Reset the button text to "Yes" (or the default text)
-      setButtonText(deleteConfirmButton, "Delete");
+      setButtonText(deleteConfirmButton, false, "Delete", "Deleting...");
     });
 }
 
