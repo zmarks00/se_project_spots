@@ -6,9 +6,7 @@ export function setButtonText(
 ) {
   if (isLoading) {
     btn.textContent = loadingText;
-    btn.setAttribute("disabled", "true");
   } else {
     btn.textContent = defaultText;
-    btn.removeAttribute("disabled");
   }
 }

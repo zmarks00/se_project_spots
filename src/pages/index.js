@@ -5,6 +5,9 @@ import { resetValidation } from "../scripts/validation.js";
 import { setButtonText } from "../utils/helpers.js";
 import Api from "../utils/Api.js";
 
+let cardToDeleteId;
+let cardToDeleteElement;
+
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
@@ -92,11 +95,8 @@ function getCardElement(data, userInfo) {
   cardImageEl.src = data.link;
   cardImageEl.alt = data.name;
 
-  // Ensure data.likes is an array
-  const likes = data.likes || [];
-
   // Set initial like state based on whether the user has liked the card
-  if (likes.some((like) => like._id === userInfo._id)) {
+  if (data.isLiked) {
     cardLikeButton.classList.add("card__like-button_liked");
   }
 
@@ -130,6 +130,8 @@ function getCardElement(data, userInfo) {
   // Delete card logic
   cardDeleteButton.addEventListener("click", () => {
     handleDeleteCardSubmit(cardElement, data._id);
+    cardToDeleteId = data._id;
+    cardToDeleteElement = cardElement;
   });
 
   cardImageEl.addEventListener("click", () => {
@@ -139,7 +141,7 @@ function getCardElement(data, userInfo) {
     previewModalImageElement.alt = data.name;
   });
 
-  return cardElement;
+  return cardElement; // Ensure this is inside the function
 }
 
 function closeOverlay(evt) {
@@ -172,7 +174,7 @@ function closeModal(modal) {
 function handleEditFormSubmit(evt) {
   evt.preventDefault();
   const submitBtn = evt.submitter;
-  setButtonText(submitBtn, "Saving...");
+  setButtonText(submitBtn, true);
 
   api
     .editUserInfo({
@@ -186,14 +188,14 @@ function handleEditFormSubmit(evt) {
     })
     .catch(console.error)
     .finally(() => {
-      setButtonText(submitBtn, "Save");
+      setButtonText(submitBtn, false);
     });
 }
 
 function handleAddCardSubmit(evt) {
   evt.preventDefault();
   const submitBtn = evt.submitter;
-  setButtonText(submitBtn, "Saving...");
+  setButtonText(submitBtn, true);
   const cardData = { name: cardNameInput.value, link: cardLinkInput.value };
 
   api
@@ -203,12 +205,13 @@ function handleAddCardSubmit(evt) {
       cardsList.prepend(cardElement);
       closeModal(cardModal);
       evt.target.reset();
+      disableButton(submitBtn, settings);
     })
     .catch((err) => {
       console.error("Error creating card:", err);
     })
     .finally(() => {
-      setButtonText(submitBtn, "Save");
+      setButtonText(submitBtn, false);
     });
 }
 
@@ -219,36 +222,39 @@ function handleDeleteCardSubmit(cardElement, cardId) {
   const deleteConfirmButton = deleteModal.querySelector(
     ".modal__confirm-button"
   );
-
   // Add a one-time event listener for the confirmation
-  deleteConfirmButton.addEventListener(
-    "click",
-    () => {
-      // Set the button text to "Deleting..."
-      setButtonText(deleteConfirmButton, (defaultText = "Deleting..."));
+  deleteConfirmButton.addEventListener("click", () => {
+    setButtonText(deleteConfirmButton, "Delete");
 
-      api
-        .deleteCard(cardId)
-        .then(() => {
-          cardElement.remove(); // Remove the card from the DOM
-          closeModal(deleteModal); // Close the modal
-        })
-        .catch((err) => {
-          console.error("Error deleting card:", err);
-        })
-        .finally(() => {
-          // Reset the button text to "Yes" (or the default text)
-          setButtonText(deleteConfirmButton, (loadingText = "Yes"));
-        });
-    },
-    { once: true } // Ensure the event listener is only triggered once
-  );
+    const deleteForm = deleteModal.querySelector(".modal__form");
+    deleteForm.addEventListener(
+      "submit",
+      (evt) => {
+        evt.preventDefault();
+
+        api
+          .deleteCard(cardId)
+          .then(() => {
+            cardElement.remove(); // Remove the card from the DOM
+            closeModal(deleteModal); // Close the modal
+          })
+          .catch((err) => {
+            console.error("Error deleting card:", err);
+          })
+          .finally(() => {
+            // Reset the button text to "Yes" (or the default text)
+            setButtonText(deleteConfirmButton, "Yes");
+          });
+      },
+      { once: true } // Ensure the event listener is only triggered once
+    );
+  });
 }
 
 function handleAvatarSubmit(evt) {
   evt.preventDefault();
   const submitBtn = evt.submitter;
-  setButtonText(submitBtn, "Saving...");
+  setButtonText(submitBtn, true);
   const avatarUrl = avatarInput.value;
 
   api
@@ -263,7 +269,7 @@ function handleAvatarSubmit(evt) {
       console.error("Error updating avatar:", err);
     })
     .finally(() => {
-      setButtonText(submitBtn, "Save");
+      setButtonText(submitBtn, false);
     });
 }
 
